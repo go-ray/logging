@@ -3,6 +3,7 @@ package logging
 import (
 	"fmt"
 	"path"
+	"path/filepath"
 	"time"
 
 	rotatelogs "github.com/lestrrat/go-file-rotatelogs"
@@ -15,6 +16,7 @@ var logger *logrus.Logger
 
 func InitLogger(logpath, name, level, format string) {
 	baseLogPath := path.Join(logpath, name)
+	baseLogPath, _ = filepath.Abs(baseLogPath)
 	fmt.Println("base log path:", baseLogPath)
 	writer, err := rotatelogs.New(
 		baseLogPath+".%Y%m%d%H%M",
