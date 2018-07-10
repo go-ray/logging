@@ -1,6 +1,5 @@
 language: go
 go:
-  - 1.8.x
   - 1.9.x
   - 1.10.x
   - tip
@@ -11,5 +10,11 @@ install:
   - go get -u -v github.com/pkg/errors
   - go get -u -v github.com/rifflock/lfshook
   - go get -u -v github.com/sirupsen/logrus
+  - go get -u -v golang.org/x/tools/cmd/cover
+  - go get -u -v github.com/mattn/goveralls
 script:
   - go test -race -v ./...
+
+after_success:
+  - go test -v -covermode=count -coverprofile=coverage.out
+  - $HOME/gopath/bin/goveralls -coverprofile=profile.cov -service=travis-ci
