@@ -9,7 +9,6 @@ jobs:
       - run: go get -u -v github.com/pkg/errors
       - run: go get -u -v github.com/rifflock/lfshook
       - run: go get -u -v github.com/sirupsen/logrus
-
   test:
     docker:
       - image: circleci/golang
